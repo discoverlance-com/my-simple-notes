@@ -1,0 +1,30 @@
+{
+  "name": "My Simple Notes",
+  "short_name": "Simple Notes",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#a4032c",
+  "lang": "en",
+  "scope": "/",
+  "id": "?source=pwa",
+  "orientation": "portrait",
+  "description": "Manage your notes",
+  "display_override": ["window-controls-overlay"],
+  "categories": ["productivity"],
+  "shortcuts": [
+    {
+      "name": "Open Notes",
+      "short_name": "Open",
+      "description": "View your notes",
+      "url": "/"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/file.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
