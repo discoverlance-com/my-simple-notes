@@ -1,73 +1,123 @@
-# React + TypeScript + Vite
+# My Simple Notes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, modern, and minimal notes app built with [Vite](https://vitejs.dev/) and [React](https://react.dev/).
+Supports offline usage as a Progressive Web App (PWA) and can be deployed as a static site or containerized for platforms like Google Cloud Run.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- ⚡️ **Vite + React**: Instant reloads, fast builds
+- 📝 **Note-taking**: Simple, clean UI for managing notes
+- 📱 **PWA**: Installable, works offline, mobile-friendly
+- 🚀 **Docker-ready**: Easily deploy as a container
+- ☁️ **Cloud Run compatible**: Ready for Google Cloud Run
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Node.js](https://nodejs.org/) (v16 or newer recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+git clone https://github.com/yourusername/my-simple-notes.git
+cd my-simple-notes
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Local Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```sh
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Progressive Web App (PWA)
+
+- The app is installable and works offline.
+- Make sure to build and serve the `dist` folder with a static server for full PWA support.
+
+---
+
+## Building for Production
+
+```sh
+npm run build
+```
+The output will be in the `dist` directory.
+
+---
+
+## Docker Deployment
+
+Build and run the app with Docker:
+
+```sh
+docker build -t my-simple-notes .
+docker run -p 8080:8080 my-simple-notes
+```
+
+---
+
+## Deploying to Google Cloud Run
+
+1. Build and tag your Docker image:
+   ```sh
+   docker build -t us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-simple-notes:latest .
+   ```
+2. Push to Artifact Registry:
+   ```sh
+   docker push us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-simple-notes:latest
+   ```
+3. Deploy to Cloud Run:
+   ```sh
+   gcloud run deploy my-simple-notes \
+     --image us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-simple-notes:latest \
+     --platform managed \
+     --region us-central1 \
+     --allow-unauthenticated
+   ```
+
+---
+
+## Project Structure
+
+```
+my-simple-notes/
+├── public/           # Static assets (manifest, icons, sw.js)
+├── src/              # React source code
+│   ├── App.tsx
+│   └── ...
+├── Dockerfile        # For containerization
+├── nginx.conf        # (optional) Custom nginx config for SPA routing
+├── package.json
+├── README.md
+└── ...
+```
+
+---
+
+## Contributing
+
+Pull requests and issues are welcome!
+Please open an issue to discuss your ideas or report bugs.
+
+---
+
+## License
+
+MIT
+
+---
+
+## Author
+
+[Lance Armah-Abraham](https://github.com/discoverlance-com)
 ```
