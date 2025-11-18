@@ -58,7 +58,8 @@ function App() {
             My Simple Notes
           </h1>
           <p className="mt-3 text-lg text-center text-muted-foreground">
-            Capture your thoughts, organize your ideas
+            Capture your thoughts, organize your ideas. All your data is stored
+            in the browser
           </p>
         </div>
 
