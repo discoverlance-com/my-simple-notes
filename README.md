@@ -120,4 +120,3 @@ MIT
 ## Author
 
 [Lance Armah-Abraham](https://github.com/discoverlance-com)
-```
