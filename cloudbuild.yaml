@@ -1,18 +1,12 @@
 steps:
-  - name: 'node:22'
-    entrypoint: 'npm'
-    args: ['ci']
-
-  - name: 'node:22'
+  - name: 'mcr.microsoft.com/playwright:focal'
     entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        npx playwright install --with-deps
-
-  - name: 'node:22'
-    entrypoint: 'npm'
-    args: ['run', 'test:ci']
+    env:
+      - 'CI=true'
+    script: |
+      set -e
+      npm ci
+      npm run test:ci
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
