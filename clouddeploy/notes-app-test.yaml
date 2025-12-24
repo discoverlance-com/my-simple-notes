@@ -2,14 +2,15 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: my-sample-notes-app-test
+  annotations:
+    run.googleapis.com/invoker-iam-disabled: 'true'
 spec:
   template:
     metadata:
       annotations:
         autoscaling.knative.dev/maxScale: '1'
     spec:
-      serviceAccountName: demo-svc@${PROJECT_ID}.iam.gserviceaccount.com
+      serviceAccountName: demo-svc@omni-deploy-run.iam.gserviceaccount.com
       containers:
         - name: my-sample-notes
           image: my-sample-notes
-skaffold build --interactive=false --default-repo $env:REGION-docker.pkg.dev/omni-deploy-run/myapps --file-output artifacts.json

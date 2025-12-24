@@ -6,9 +6,9 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/maxScale: '1'
+        autoscaling.knative.dev/maxScale: '3'
     spec:
-      serviceAccountName: demo-svc@${PROJECT_ID}.iam.gserviceaccount.com
+      serviceAccountName: demo-svc@omni-deploy-run.iam.gserviceaccount.com
       containers:
         - name: my-sample-notes
           image: my-sample-notes

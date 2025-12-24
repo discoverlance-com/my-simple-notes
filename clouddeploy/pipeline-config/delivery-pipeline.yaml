@@ -1,0 +1,13 @@
+apiVersion: deploy.cloud.google.com/v1beta1
+kind: DeliveryPipeline
+metadata:
+  name: my-sample-notes
+description: Deployment pipeline for my sample notes application
+serialPipeline:
+  stages:
+    - targetId: test-cloudrun
+      profiles: [test]
+    - targetId: staging-cloudrun
+      profiles: [staging]
+    - targetId: prod-cloudrun
+      profiles: [prod]

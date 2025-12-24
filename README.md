@@ -110,6 +110,57 @@ Cloud Build.
 
 ---
 
+### Cloud Deploy / Skaffold (optional)
+
+The `clouddeploy` folder contains example Skaffold + Cloud Deploy YAML to help
+set up multi-target deployments (test, staging, prod) for Cloud Run. This is
+optional — the repository's primary CI path is the included `cloudbuild.yaml`.
+
+Before using the `clouddeploy` examples, replace the concrete names in the YAML
+files with your values (project id, image names, service account emails).
+
+- `clouddeploy/skaffold.yaml`
+  - `build.artifacts[0].image` — currently the short image name
+    `my-sample-notes`. Replace with the image name you want Skaffold to produce
+    (for example `my-sample-notes`).
+  - `build.googleCloudBuild.serviceAccount` — replace this value with your
+    service account email
+    (projects/.../serviceAccounts/NAME@PROJECT.iam.gserviceaccount.com).
+
+- `clouddeploy/notes-app-*.yaml` — update
+  `spec.template.spec.serviceAccountName` (application runtime service account)
+  and `containers[0].image`.
+
+- `clouddeploy/pipeline-config/target-*.yaml` — update `run.location` (project
+  string and location) and `executionConfigs[].serviceAccount` (target service
+  account).
+
+Service account role guidance:
+
+- Skaffold / controller service account: `roles/artifactregistry.writer`,
+  `roles/storage.admin`, `roles/run.admin`, `roles/logging.logWriter`.
+- Cloud Deploy target service accounts: `roles/artifactregistry.writer`,
+  `roles/clouddeploy.runner`, `roles/run.developer`,
+  `roles/iam.serviceAccountUser`.
+- Application runtime service account: `roles/logging.logWriter` plus any
+  app-specific roles required by your service.
+
+This section is intentionally minimal — it points you to the files to edit and
+the roles to grant; do not apply the example manifests until you have replaced
+the concrete names with your project-specific values.
+
+#### Getting Started with Cloud Deply
+
+After you have performed the initial changes and service account updates, you
+can go ahead to use skaffold to setup the environment and deploy your pipeline.
+Visit this
+[Google Cloud Quick start for Cloud Run](https://docs.cloud.google.com/deploy/docs/deploy-app-run)
+documentation for more details.
+
+```bash
+
+```
+
 ## Project Structure
 
 ```text

@@ -1,0 +1,12 @@
+apiVersion: deploy.cloud.google.com/v1beta1
+kind: Target
+metadata:
+  name: staging-cloudrun
+description: Staging target
+run:
+  location: projects/omni-deploy-run/locations/us-central1
+executionConfigs:
+  - usages:
+      - RENDER
+      - DEPLOY
+    serviceAccount: cloud-deploy-svc@omni-deploy-run.iam.gserviceaccount.com

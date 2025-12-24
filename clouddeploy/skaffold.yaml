@@ -7,8 +7,8 @@ build:
     - image: my-sample-notes
       context: ../
   googleCloudBuild:
-    projectId: ${PROJECT_ID}
-    serviceAccount: projects/${PROJECT_ID}/serviceAccounts/cloud-deploy-svc@${PROJECT_ID}.iam.gserviceaccount.com
+    projectId: omni-deploy-run
+    serviceAccount: projects/omni-deploy-run/serviceAccounts/cloud-build-custom-sa@omni-deploy-run.iam.gserviceaccount.com
 deploy:
   cloudrun: {}
 profiles:
