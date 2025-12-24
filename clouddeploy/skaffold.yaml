@@ -9,7 +9,6 @@ build:
   googleCloudBuild:
     projectId: ${PROJECT_ID}
     serviceAccount: projects/${PROJECT_ID}/serviceAccounts/cloud-deploy-svc@${PROJECT_ID}.iam.gserviceaccount.com
-    bucket: omni-deploy-run-demo-bucket
 deploy:
   cloudrun: {}
 profiles:
