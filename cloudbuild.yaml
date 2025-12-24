@@ -4,6 +4,13 @@ steps:
     args: ['ci']
 
   - name: 'node:22'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        npx playwright install --with-deps
+
+  - name: 'node:22'
     entrypoint: 'npm'
     args: ['run', 'test:ci']
 
