@@ -1,7 +1,9 @@
 # My Simple Notes
 
-A fast, modern, and minimal notes app built with [Vite](https://vitejs.dev/) and [React](https://react.dev/).
-Supports offline usage as a Progressive Web App (PWA) and can be deployed as a static site or containerized for platforms like Google Cloud Run.
+A fast, modern, and minimal notes app built with [Vite](https://vitejs.dev/) and
+[React](https://react.dev/). Supports offline usage as a Progressive Web App
+(PWA) and can be deployed as a static site or containerized for platforms like
+Google Cloud Run.
 
 ---
 
@@ -35,6 +37,7 @@ npm install
 ```sh
 npm run dev
 ```
+
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
@@ -42,7 +45,8 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ## Progressive Web App (PWA)
 
 - The app is installable and works offline.
-- Make sure to build and serve the `dist` folder with a static server for full PWA support.
+- Make sure to build and serve the `dist` folder with a static server for full
+  PWA support.
 
 ---
 
@@ -51,6 +55,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ```sh
 npm run build
 ```
+
 The output will be in the `dist` directory.
 
 ---
@@ -69,27 +74,45 @@ docker run -p 8080:8080 my-simple-notes
 ## Deploying to Google Cloud Run
 
 1. Build and tag your Docker image:
+
    ```sh
-   docker build -t us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-simple-notes:latest .
+   docker build -t us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-sample-notes:latest .
    ```
+
 2. Push to Artifact Registry:
+
    ```sh
-   docker push us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-simple-notes:latest
+   docker push us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-sample-notes:latest
    ```
+
 3. Deploy to Cloud Run:
+
    ```sh
-   gcloud run deploy my-simple-notes \
-     --image us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-simple-notes:latest \
+
+   gcloud run deploy my-sample-notes \
+     --image us-central1-docker.pkg.dev/<PROJECT-ID>/<REPO>/my-sample-notes:latest \
      --platform managed \
      --region us-central1 \
      --allow-unauthenticated
    ```
 
+Note: this repo includes a `cloudbuild.yaml` that builds, tests, and deploys the
+image to Cloud Run using Google Cloud Build. You can also use a GitHub Actions
+workflow to build and deploy, but this project keeps deployment simple by using
+Cloud Build.
+
+### Cloud Build Deployment notes
+
+- Create a Cloud Build trigger that uses the repository and the included
+  `cloudbuild.yaml` so Cloud Build runs the steps defined there on each trigger.
+- Update the image repository in the commands above to your Artifact Registry
+  path (for example `us-central1-docker.pkg.dev/PROJECT/REPO`).
+
 ---
 
 ## Project Structure
 
-```
+```text
 my-simple-notes/
 ├── public/           # Static assets (manifest, icons, sw.js)
 ├── src/              # React source code
@@ -106,8 +129,8 @@ my-simple-notes/
 
 ## Contributing
 
-Pull requests and issues are welcome!
-Please open an issue to discuss your ideas or report bugs.
+Pull requests and issues are welcome! Please open an issue to discuss your ideas
+or report bugs.
 
 ---
 
