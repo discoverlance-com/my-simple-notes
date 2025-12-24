@@ -32,7 +32,7 @@ function App() {
 					</h1>
 					<p className="mt-3 text-center text-lg text-muted-foreground">
 						Capture your thoughts, organize your ideas. All your data is stored
-						in the browser.
+						in the browser
 					</p>
 				</div>
 
