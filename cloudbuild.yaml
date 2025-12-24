@@ -19,19 +19,16 @@ steps:
       - 'push'
       - 'us-central1-docker.pkg.dev/omni-deploy-run/myapps/my-sample-notes:$SHORT_SHA'
 
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        set -e
-        IMAGE=us-central1-docker.pkg.dev/omni-deploy-run/myapps/my-sample-notes:$SHORT_SHA
-        gcloud run deploy my-simple-notes-us \
-          --image "$IMAGE" \
-          --region us-central1 \
-          --platform managed \
-          --allow-unauthenticated \
-          --port 80
+  - name: 'gcr.io/cloud-builders/gcloud'
+    env:
+      - 'IMAGE=us-central1-docker.pkg.dev/omni-deploy-run/myapps/my-sample-notes:$SHORT_SHA'
+    script: |
+      gcloud run deploy my-simple-notes-us \
+        --image "$IMAGE" \
+        --region us-central1 \
+        --platform managed \
+        --allow-unauthenticated \
+        --port 80
 
 images:
   - 'us-central1-docker.pkg.dev/omni-deploy-run/myapps/my-sample-notes:$SHORT_SHA'
@@ -40,3 +37,5 @@ timeout: '1200s'
 
 options:
   substitution_option: 'ALLOW_LOOSE'
+  dynamicSubstitutions: true
+  logging: CLOUD_LOGGING_ONLY
