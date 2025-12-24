@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: my-sample-notes-app-prod
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '1'
+    spec:
+      serviceAccountName: demo-svc@${PROJECT_ID}.iam.gserviceaccount.com
+      containers:
+        - name: my-sample-notes
+          image: my-sample-notes

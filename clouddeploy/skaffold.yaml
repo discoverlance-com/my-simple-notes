@@ -1,0 +1,27 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+  name: my-sample-notes
+build:
+  artifacts:
+    - image: my-sample-notes
+      context: ../
+  googleCloudBuild:
+    projectId: ${PROJECT_ID}
+    serviceAccount: projects/${PROJECT_ID}/serviceAccounts/cloud-deploy-svc@${PROJECT_ID}.iam.gserviceaccount.com
+    bucket: omni-deploy-run-demo-bucket
+deploy:
+  cloudrun: {}
+profiles:
+  - name: test
+    manifests:
+      rawYaml:
+        - notes-app-test.yaml
+  - name: staging
+    manifests:
+      rawYaml:
+        - notes-app-staging.yaml
+  - name: prod
+    manifests:
+      rawYaml:
+        - notes-app-prod.yaml
